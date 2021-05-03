@@ -21,7 +21,15 @@ library(LDAvis)
 ## Huck Finn, Communist Manifesto, Ulysses, The Awakening, Les Mis
 
 ulysses <- readtext("banned_books/ulysses-by-james-joyce.txt")
-## revisit gutenberger package, try to do these one at a time; will process out project gutenberg front matter so I don't have to do that manually
+## revisit gutenbergr package, try to do these one at a time; will process out project gutenberg front matter so I don't have to do that manually
+# hgwells <- gutenberg_download(c(35, 36, 5230, 159))
+# titles <- c("Twenty Thousand Leagues under the Sea", 
+#             "The War of the Worlds",
+#             "Pride and Prejudice", 
+#             "Great Expectations")
+# books <- gutenberg_works(title %in% titles) %>%
+#   gutenberg_download(meta_fields = "title")
+# ulysses_gb <- gutenberg_download(meta_fields = "Ulysses")
 
 ulysses_tidy <- ulysses %>% 
   rename(book = doc_id) %>%
@@ -36,16 +44,40 @@ ulysses_counts <- ulysses_tidy %>%
   filter(word != "chapter") %>%
   count(word, sort = TRUE) 
 
+#wordcloud
 wordcloud2(ulysses_counts,
-           color = ifelse(ulysses_counts[, 2] > 1330, 'black', 'gray'))
+           color = ifelse(ulysses_counts[, 2] > 170, 'black', 'gray'))
+
+#bargraph of counts
+ulysses_counts %>%
+  filter(n > 170) %>% 
+  mutate(word = reorder(word, n)) %>% 
+  ggplot(aes(n, word)) + #
+  geom_col() +
+  labs(x = "Word Counts", y = NULL) + 
+  theme_minimal()
 
 ulysses_frequencies <- ulysses_tidy %>%
   filter(word != "project") %>%
   filter(word != "gutenberg") %>%
   filter(word != "chapter") %>%
   count(book, word, sort = TRUE) %>%
-  group_by(book) %>%
   mutate(proportion = n / sum(n))
+
+#frequencies graph
+ulysses_frequencies %>%
+  slice_max(proportion, n = 5) %>%
+  ungroup() %>%
+  ggplot(aes(proportion, fct_reorder(word, proportion), fill = book)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~book, ncol = 3, scales = "free") +
+  labs(y = NULL, x = NULL)
+
+######
+## topic modeling ##
+#####
+
+## add to the following by using the textbook's example of chunking/chapters as novels using novels : https://www.tidytextmining.com/topicmodeling.html 
 
 ulysses_dtm <- ulysses_tidy %>%
   count(book, word) %>%
