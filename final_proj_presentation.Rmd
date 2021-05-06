@@ -371,7 +371,7 @@ leaves_of_grass %>%
 
 While not particularly saucy or naughty, I do think these are -- dare I say it -- downright poetic?
 
-## Selected quotes using filtering + grepl
+## Selected quotes using filter() + grepl()
 
 Alright, so what about some specific quotes for additional context? 
 
@@ -448,8 +448,8 @@ While poetry is a bit more abstract than prose or non-fiction and maybe therefor
 ## Limitations, implications
 
 **Limitations:**   
-- Know thy subject matter! Again, I am not a Whitman scholar and so not as capable of interpreting my outputs as someone who is a Whitman scholar might be. 
+- Know thy subject matter! Again, I am not a Whitman scholar and so not as capable of interpreting my outputs as someone who is a Whitman scholar might be.   
 - Automated text analysis like this is never going to be a stand in for a human read through in determining whether a text should be regulated in any way. 
 
 **Implications:**  
-- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisiions. But given what we've seen this semester with our forays into text mining, can see why this is the case and honeslty can't envision a world in which we are able to trust the tech entirely to handle something as delicate as controversial as censorship. 
+- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisions. But given what we've seen this semester with our forays into text mining, I can see why this is the case and honestly can't envision a world in which we are able to trust the tech entirely to handle something as delicate and controversial as censorship. 
