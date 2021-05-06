@@ -272,7 +272,7 @@ Digital humanities scholars + librarians who may be interested in seeing how tex
 
 1. I downloaded 'Leaves of Grass' using the gutenbergr package, which is helpful in that it automatically removes some of the front matter and custom stop words related to Project Gutenberg. 
 
-2. I tokenized and tidied the text, filtering out some custom stop words that show up a lot on Whitman's poetry, such as "thy", "thou" and "the". 
+2. I tokenized and tidied the text, filtering out some custom stop words that show up a lot on Whitman's poetry, such as "thy", "thou" and "thee". 
 
 3. I initially tried stemming the text but found the topic models difficult to interpret once I had, so I ultimately elected to leave stemming out of the picture. 
 
@@ -305,9 +305,9 @@ Things start to get a bit more interesting with topic modeling. I specifically u
 
 As described in [*Text Mining with R*](https://www.tidytextmining.com/topicmodeling.html): 
 
-> Topic modeling is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items even when we’re not sure what we’re looking for.
+> "Topic modeling is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items even when we’re not sure what we’re looking for.
 
-> Latent Dirichlet allocation (LDA) is a particularly popular method for fitting a topic model. It treats each document as a mixture of topics, and each topic as a mixture of words. This allows documents to “overlap” each other in terms of content, rather than being separated into discrete groups, in a way that mirrors typical use of natural language.
+> Latent Dirichlet allocation (LDA) is a particularly popular method for fitting a topic model. It treats each document as a mixture of topics, and each topic as a mixture of words. This allows documents to “overlap” each other in terms of content, rather than being separated into discrete groups, in a way that mirrors typical use of natural language."
 
 In Matthew L. Jockers' blog post ['“Secret” Recipe for Topic Modeling Themes'](https://www.matthewjockers.net/2013/04/12/secret-recipe-for-topic-modeling-themes/), it is suggested to use a 'chunking' method to break down large texts into bite-sized pieces (i.e., documents) for modeling.
 
@@ -360,7 +360,7 @@ What may be more helpful for a lay-person like me, then, is a look at some other
 
 But first, just for kicks, I decided to use the [NRC lexicon](https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) to do some sentiment analysis. 
 
-> The NRC Emotion Lexicon is a list of English words and their associations with eight basic emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) and two sentiments (negative and positive). The annotations were manually done by crowdsourcing.
+> "The NRC Emotion Lexicon is a list of English words and their associations with eight basic emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) and two sentiments (negative and positive). The annotations were manually done by crowdsourcing."
 
 Based on the results, I think it's safe to say that overall Whitman's poetry conveys more positive than negative emotions:
 
@@ -481,4 +481,4 @@ While poetry is a bit more abstract than prose or non-fiction and maybe therefor
 - Know thy subject matter! Again, I am not a Whitman scholar and so not as capable of interpreting my outputs as someone who is a Whitman scholar might be.   
 
 **Implications:**  
-- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisions. But given what we've seen this semester with our forays into text mining, I can see why this is the case and honestly can't envision a world in which we are able to trust the tech entirely to handle something as delicate and3 controversial as censorship. 
+- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisions. But given what we've seen this semester with our forays into text mining, I can see why this is the case and honestly can't envision a world in which we are able to trust the tech entirely to handle something as delicate and controversial as censorship. 
