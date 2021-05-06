@@ -250,7 +250,10 @@ An online exhibition from UVA: ["Censored: Wielding the Red Pen"](https://explor
 With these things in mind...
 
 **Purpose:**   
-To experiment with text mining methods to see if they can surface any of the notions for which Whitman was apparently shunned for in his works. 
+To experiment with text mining methods to see if they can surface any of the notions for which Whitman was apparently shunned for in his works.
+
+**Target Audience:**
+Digital humanities scholars + librarians who may be interested in seeing how text mining methods might be leveraged for gleaning the themes of texts and what questions that might be able to help answer related to censorship.
 
 **Research Questions:**  
  - Does anything saucy emerge at the word count/frequency level?  
@@ -263,7 +266,17 @@ To experiment with text mining methods to see if they can surface any of the not
 - Topic modeling using LDA
 - Sentiment analysis w/ NRC
 - Bi-grams + tri-grams
-- Selected quotes using filtering + grepl
+- Selected quotes using filter() + grepl()
+
+## Pre-processing steps
+
+1. I downloaded 'Leaves of Grass' using the gutenbergr package, which is helpful in that it automatically removes some of the front matter and custom stop words related to Project Gutenberg. 
+
+2. I tokenized and tidied the text, filtering out some custom stop words that show up a lot on Whitman's poetry, such as "thy", "thou" and "the". 
+
+3. I initially tried stemming the text but found the topic models difficult to interpret once I had, so I ultimately elected to leave stemming out of the picture. 
+
+4. I 'chunked' the text into discrete chapters for easier topic modeling. See that section for more information. 
 
 ## Basic word counts
 
@@ -288,7 +301,15 @@ word_counts %>%
 
 ## Topic modeling using LDA
 
-Things start to get a bit more interesting with topic modeling. In Matthew L. Jockers' blog post ['“Secret” Recipe for Topic Modeling Themes'](https://www.matthewjockers.net/2013/04/12/secret-recipe-for-topic-modeling-themes/), it is suggested to use a 'chunking' method to break down large texts into bite-sized pieces for modeling.
+Things start to get a bit more interesting with topic modeling. I specifically used LDA, or Latent Dirichlet Allocation
+
+As described in [*Text Mining with R*](https://www.tidytextmining.com/topicmodeling.html): 
+
+> Topic modeling is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items even when we’re not sure what we’re looking for.
+
+> Latent Dirichlet allocation (LDA) is a particularly popular method for fitting a topic model. It treats each document as a mixture of topics, and each topic as a mixture of words. This allows documents to “overlap” each other in terms of content, rather than being separated into discrete groups, in a way that mirrors typical use of natural language.
+
+In Matthew L. Jockers' blog post ['“Secret” Recipe for Topic Modeling Themes'](https://www.matthewjockers.net/2013/04/12/secret-recipe-for-topic-modeling-themes/), it is suggested to use a 'chunking' method to break down large texts into bite-sized pieces (i.e., documents) for modeling.
 
 I was able to accomplish something similar following [the example provded in 'Text Mining with R'](https://www.tidytextmining.com/topicmodeling.html#library-heist) in which a book is broken down into it's chapters (or in the case of *Leaves of Grass*, "books").
 
@@ -331,11 +352,17 @@ Here's what that looked like:
 
 Looking at the results of these models drove home one point we've discussed many times this semester: it's important to have some familiarity with your subject matter! Text mining methods can't be a stand in for other kinds of scholarship, they can only add to the knowledge you may already have. And a Whitman scholar I am not, meaning I'm not able to make much sense out of these models. If I *were* a Whitman scholar, I'm sure I'd be able to pick up on whether or not any of these topics are representative of commonly accepted themes in his poetry. 
 
+I know that Whitman was well known for writing about place, and topics 1, 7, and 30 when k = 34 look like they might be in that vein. His poetry has also been analyzed by many queer theorists, but it's much harder to tell at the topic level with either value of k if any themes of homoeroticism are present. 
+
 What may be more helpful for a lay-person like me, then, is a look at some other kinds of metrics, such as bi-grams and tri-grams. 
 
 ## Sentiment analysis using NRC
 
-But first, just for kicks, I decided to use the NRC lexicon to do some sentiment analysis. Based on the results, I think it's safe to say that overall Whitman's poetry conveys more positive than negative emotions:
+But first, just for kicks, I decided to use the [NRC lexicon](https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) to do some sentiment analysis. 
+
+> The NRC Emotion Lexicon is a list of English words and their associations with eight basic emotions (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) and two sentiments (negative and positive). The annotations were manually done by crowdsourcing.
+
+Based on the results, I think it's safe to say that overall Whitman's poetry conveys more positive than negative emotions:
 
 ```{r, eval=T, echo=F}
 nrc_counts %>%
@@ -349,12 +376,12 @@ nrc_counts %>%
 
 ## Bi-grams + tri-grams
 
-Ok, bi-grams... 
+Ok, bi-grams (or pairs of words that appear together)... 
 
 ```{r, eval=T, echo=F}
 bigram_counts
 ```
-...and tri-grams: 
+...and tri-grams (three words that appear together in a row): 
 
 ```{r, eval=T, echo=F}
 leaves_of_grass %>%
@@ -445,11 +472,13 @@ While poetry is a bit more abstract than prose or non-fiction and maybe therefor
 
 
 
-## Limitations, implications
+## Conclusion, Limitations, implications
+
+**Conclusions:**    
+- Automated text analysis like this is never going to be a stand in for a human read through in determining the themes of a text and or whether a text should be regulated in any way. It can, however, be a good way to augment or add to your understanding of a text. 
 
 **Limitations:**   
 - Know thy subject matter! Again, I am not a Whitman scholar and so not as capable of interpreting my outputs as someone who is a Whitman scholar might be.   
-- Automated text analysis like this is never going to be a stand in for a human read through in determining whether a text should be regulated in any way. 
 
 **Implications:**  
-- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisions. But given what we've seen this semester with our forays into text mining, I can see why this is the case and honestly can't envision a world in which we are able to trust the tech entirely to handle something as delicate and controversial as censorship. 
+- While we are on the subject of censorship, I've been hearing/reading a lot of news stories recently about [Facebook's oversight board](https://oversightboard.com/) + general content moderation methods. I was honestly surprised to learn that they have never really relied on automation for their content moderation, and instead have teams of real people who are responsible for reviewing things and making decisions. But given what we've seen this semester with our forays into text mining, I can see why this is the case and honestly can't envision a world in which we are able to trust the tech entirely to handle something as delicate and3 controversial as censorship. 
