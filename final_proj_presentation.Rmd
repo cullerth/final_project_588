@@ -225,7 +225,7 @@ For my final project, I returned to Project Gutenberg and the question of banned
 
 ## Case Study: *Leaves of Grass*, by Walt Whitman
 
-My original goal with my first independent analysis was to determine if there is indeed anything particularly risqué that shows up at the level of individual words in some commonly banned/challenged books. The results were intriguing, if pretty limited. I then appplied topic modeling methods in a subsequent analysis to see if a more nuanced analysis emerges, and wasn't really impressed with the results there either. In both cases, I determined that looking at so many disparate books at once was really muddying my results.
+My original goal with my first independent analysis was to determine if there is indeed anything particularly risqué that shows up at the level of individual words in some commonly banned/challenged books. The results were intriguing, if pretty limited. I then applied topic modeling methods in a subsequent analysis to see if a more nuanced analysis emerged, and wasn't really impressed with the results there either. In both cases, I determined that looking at so many disparate books at once was really muddying my results.
 
 This time, then, I decided to focus on a single banned book as a case study: *Leaves of Grass* by Walt Whitman. 
 
@@ -234,7 +234,7 @@ This time, then, I decided to focus on a single banned book as a case study: *Le
 </center>
 
 ## What's so bad about some leaves and grass anyway? 
-Whitman's contemporaries definitely didn't see this book as mere detritus. I was able to get ahold of the full text of *Banned Books* via [HathiTrust](https://www.hathitrust.org/), and here are Anne Haight's notes on *Leaves*:
+Whitman's contemporaries definitely didn't see this book as mere detritus. I was able to get a hold of the full text of *Banned Books* via [HathiTrust](https://www.hathitrust.org/), and here are Anne Haight's notes on *Leaves*:
 <center>
 ![](images/leaves_haight_notes.jpg){width=50%}
 </center>
@@ -253,7 +253,7 @@ With these things in mind...
 To experiment with text mining methods to see if they can surface any of the notions for which Whitman was apparently shunned for in his works.
 
 **Target Audience:**
-Digital humanities scholars + librarians who may be interested in seeing how text mining methods might be leveraged for gleaning the themes of texts and what questions that might be able to help answer related to censorship.
+Digital humanities scholars + librarians who may be interested in seeing how text mining methods might be leveraged for gleaning the themes of texts and what questions they might be able to help answer related to censorship.
 
 **Research Questions:**  
  - Does anything saucy emerge at the word count/frequency level?  
@@ -311,7 +311,7 @@ As described in [*Text Mining with R*](https://www.tidytextmining.com/topicmodel
 
 In Matthew L. Jockers' blog post ['“Secret” Recipe for Topic Modeling Themes'](https://www.matthewjockers.net/2013/04/12/secret-recipe-for-topic-modeling-themes/), it is suggested to use a 'chunking' method to break down large texts into bite-sized pieces (i.e., documents) for modeling.
 
-I was able to accomplish something similar following [the example provded in 'Text Mining with R'](https://www.tidytextmining.com/topicmodeling.html#library-heist) in which a book is broken down into it's chapters (or in the case of *Leaves of Grass*, "books").
+I was able to accomplish something similar following [the example provded in 'Text Mining with R'](https://www.tidytextmining.com/topicmodeling.html#library-heist) in which a book is broken down into its chapters (or in the case of *Leaves of Grass*, "books").
 
 ```{r, eval=F, echo=T}
 by_chapter <- leaves_of_grass %>%

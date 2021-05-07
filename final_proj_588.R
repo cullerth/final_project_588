@@ -250,14 +250,14 @@ FindTopicsNumber_plot(k_metrics_books)
 
 leaves_of_grass <- gutenberg_download(1322)
 
-# divide into documents, each representing one chapter
+# divide into documents, each representing one chapter (or 'book' in the case of leaves of grass)
 by_chapter <- leaves_of_grass %>%
   mutate(chapter = cumsum(str_detect(
-    text, regex("^BOOK I ", ignore_case = FALSE)
+    text, regex("^BOOK ", ignore_case = FALSE)
   ))) %>%
   ungroup() %>%
   filter(chapter > 0) %>%
-  unite(document, title, chapter)
+  unite(document, chapter)
 
 # split into words
 by_chapter_word <- by_chapter %>%
@@ -268,6 +268,7 @@ word_counts <- by_chapter_word %>%
   anti_join(stop_words) %>%
   count(document, word, sort = TRUE) %>%
   ungroup()
+#stop words to filter out include: thee, thy, thou 
 
 chapters_dtm <- word_counts %>%
   cast_dtm(document, word, n)
